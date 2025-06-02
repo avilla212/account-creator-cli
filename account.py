@@ -33,7 +33,8 @@ class Account:
     def displayMenu(self) -> None:
         print("1. Create Account")
         print("2. Search for Account")
-        print("3. Display all accounts")    
+        print("3. Display all accounts")
+        print("4. Update Password")    
         print("0. Exit")
         print("Please select an option (0-3):")
 
