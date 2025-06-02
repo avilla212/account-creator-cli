@@ -15,6 +15,8 @@ def yellow(text):
     return f"\033[93m{text}\033[0m"  # Yellow
 
 def main():
+    WIDTH = 30  # Width for formatting output
+
     # Create an Account instance with default values
     account_manager = Account("default", "default")
 
@@ -24,11 +26,11 @@ def main():
     choice = -1  # Sentinel value
 
     while choice != 0:
-        print("\n" + "="*30)
+        print("\n" + "="*WIDTH)
         print("        ACCOUNT MENU")
-        print("="*30)
+        print("="*WIDTH)
         account_manager.displayMenu()
-        print("="*30)
+        print("="*WIDTH)
 
         try:
             choice = int(input("Enter your choice (0 to quit): "))
@@ -51,7 +53,10 @@ def main():
         elif choice == 3:
             action = account_manager.handleChoices(choice)
             action()
-
+        elif choice == 4:
+            website = input("\nEnter website to update password: ")
+            action = account_manager.handleChoices(choice)
+            action(website)
         elif choice == 0:
             print(yellow("\nSaving accounts and exiting..."))
             account_manager.saveAccountToFile("accounts.txt")

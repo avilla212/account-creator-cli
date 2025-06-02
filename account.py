@@ -46,7 +46,8 @@ class Account:
         switcher = {
             1: self.addAccount,
             2: self.getAccount,
-            3: self.displayAllAccounts
+            3: self.displayAllAccounts,
+            4: self.updatePassword
         }
         return switcher.get(choice, lambda *args: print("Invalid choice"))
 
@@ -116,7 +117,8 @@ class Account:
     # ====================================
     def getPassword(self) -> str:
         return self.password
-
+    
+   
     # ========= saveAccountToFile ================
     # Overwrites all accounts to the specified file.
     # Input: filename (str)
@@ -186,5 +188,24 @@ class Account:
         except Exception as e:
             print(f"Error generating secure password: {e}")
             return "defaultPassword123!"
+
+    # ========= updataPassword ================
+    # Updates the password for a given website by generating a new secure password.
+    # Input: website (str)
+    # Output: Bool (True if updated successfully, False if an error occurred)
+    # ========================================
+    def updatePassword(self, website: str) -> bool:
+        try:
+            if website in self.accounts:
+                newPassword = self.generateSecurePassword()
+                self.accounts[website]['password'] = newPassword
+                print(f"Password for {website} updated successfully.")
+                return True
+            else:
+                print(f"Account for {website} does not exist.")
+                return False
+        except Exception as e:
+            print(f"Error updating password: {e}")
+            return False
 
 __all__ = ["Account"]
