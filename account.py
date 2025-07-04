@@ -118,8 +118,7 @@ class Account:
     # ====================================
     def getPassword(self) -> str:
         return self.password
-    
-   
+
     # ========= saveAccountToFile ================
     # Overwrites all accounts to the specified file.
     # Input: filename (str)
@@ -186,9 +185,29 @@ class Account:
 
             print(f"Generated secure password: {res}")
             return res
+
         except Exception as e:
             print(f"Error generating secure password: {e}")
             return "defaultPassword123!"
+
+    # ========= replacePassword ================
+    # Replaces the password for a given website with a new secure password.
+    # Input: website (str)
+    # Output: Bool (True if replaced successfully, False if an error occurred)
+    # ========================================
+    def replacePassword(self, website: str) -> bool:
+        try:
+            if website in self.accounts:
+                newPassword =input("Enter new password: ")
+                self.accounts[website]['password'] = newPassword
+                print(f"Password for {website} updated successfully.")
+                return True
+            else:
+                print(f"Account for {website} does not exist.")
+                return False
+        except Exception as e:
+            print(f"Error replacing password: {e}")
+            return False
 
     # ========= updataPassword ================
     # Updates the password for a given website by generating a new secure password.
@@ -208,5 +227,8 @@ class Account:
         except Exception as e:
             print(f"Error updating password: {e}")
             return False
-
+    
+    # ========= set
+    
+    
 __all__ = ["Account"]
